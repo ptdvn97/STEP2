@@ -1,0 +1,100 @@
+#include <main.h>
+
+#define BUT_1   input(PIN_B4)
+#define BUT_2   input(PIN_B5)
+
+#define A PIN_D4
+#define B PIN_D5
+#define C PIN_D6
+#define D PIN_D7
+
+int m=0,n=0;
+#INT_RB
+void interrupt()
+{
+   while(1)
+   {
+   if(BUT_1==1)
+   {
+      n=1;
+      while(BUT_1==1)
+         {delay_ms(1);}
+      while(n==1)
+      {
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay_ms(70);
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay_ms(70);
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay_ms(70);
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay_ms(70);
+         if(BUT_2==1)
+            {
+               n=0;
+               output_bit(A,1);
+               output_bit(B,0);
+               delay_ms(40);
+               break;
+            }
+      }
+   }
+   if(BUT_2==1)
+   {
+      m=1;
+      while(BUT_2==1)
+         {delay_ms(1);}
+      while(m==1)
+      {
+         
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay_ms(70);
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay_ms(70);
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay_ms(70);
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay_ms(70);
+         if(BUT_1==0)
+            {
+               m=0;
+               output_bit(A,1);
+               output_bit(B,0);
+               delay_ms(40);
+               break;
+            }
+      }
+   }
+}}
+
+void main()
+{
+   output_d(0x00);
+   clear_interrupt(INT_RB);
+   enable_interrupts(INT_RB);
+   enable_interrupts(GLOBAL);  
+}

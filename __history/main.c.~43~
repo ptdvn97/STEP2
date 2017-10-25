@@ -1,0 +1,95 @@
+#include <main.h>
+
+#define BUT_1   input(PIN_B4)
+#define BUT_2   input(PIN_B5)
+
+#define A PIN_D4
+#define B PIN_D5
+#define C PIN_D6
+#define D PIN_D7
+
+int m=0,n=0,k=0;
+void delay()
+{
+   delay_ms(60);
+   if(BUT_2==0||BUT_1==0)
+            {
+            while(BUT_2==0||BUT_1==0)
+            {delay_ms(10);}
+                  n=0,m=0;
+                  break;
+            }
+}
+
+#INT_RB
+void interrupt()
+{
+while(1)
+{
+   if(BUT_1==0)
+   {
+      n=1;
+      while(BUT_1==0)
+         {delay_ms(1);}
+      while(n==1)
+      {
+         
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay();
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay();
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay();
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay();
+      }
+   }
+   if(BUT_2==0)
+   {
+      m=1;
+      while(BUT_2==0)
+         {delay_ms(1);}
+      while(m==1)
+      {
+         
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay();
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,1);
+         output_bit(D,0);
+         delay();
+         output_bit(A,0);
+         output_bit(B,1);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay();
+         output_bit(A,1);
+         output_bit(B,0);
+         output_bit(C,0);
+         output_bit(D,1);
+         delay();
+      }
+   }
+}
+}
+void main()
+{
+   enable_interrupts(INT_RB);
+   enable_interrupts(GLOBAL);  
+}
